@@ -167,7 +167,6 @@ public class RtlViewPager extends ViewPager {
         mLayoutDirection = ss.mLayoutDirection;
     }
 
-
     @Override
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         super.setOnPageChangeListener(new ReversingOnPageChangeListener(listener));
