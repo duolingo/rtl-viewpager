@@ -31,6 +31,16 @@ import android.view.ViewGroup;
 
 import java.util.HashMap;
 
+/**
+ * <code>RtlViewPager</code> is an API-compatible implemetation of <code>ViewPager</code> which
+ * orders paged views according to the layout direction of the view.  In left to right mode, the
+ * first view is at the left side of the carousel, and in right to left mode it is at the right
+ * side.
+ *
+ * It accomplishes this by wrapping the provided <code>PagerAdapter</code> and any provided
+ * <code>OnPageChangeListener</code>s so that clients can be agnostic to layout direction and
+ * modifications are kept internal to <code>RtlViewPager</code>.
+ */
 public class RtlViewPager extends ViewPager {
     private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
     private HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
