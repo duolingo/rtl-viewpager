@@ -184,6 +184,23 @@ public class RtlViewPager extends ViewPager {
         super.removeOnPageChangeListener(mPageChangeListeners.get(listener));
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
+            int height = 0;
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                int h = child.getMeasuredHeight();
+                if (h > height) {
+                    height = h;
+                }
+            }
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+        }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
     private class ReversingOnPageChangeListener implements OnPageChangeListener {
         private final OnPageChangeListener mListener;
 
@@ -310,23 +327,6 @@ public class RtlViewPager extends ViewPager {
             }
             super.setPrimaryItem(container, position, object);
         }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
-            int height = 0;
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
-                child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-                int h = child.getMeasuredHeight();
-                if (h > height) {
-                    height = h;
-                }
-            }
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-        }
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
 
