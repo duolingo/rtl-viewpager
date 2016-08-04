@@ -3,7 +3,7 @@
 [Android v4 Support Library](https://developer.android.com/topic/libraries/support-library/features.html#v4).
 It extends the functionality of `ViewPager` such that when the layout direction is right to left, pages scroll accordingly.
 `RtlViewPager` fully supports data set changes, interoperation with tab strips, and saving and restoring state on screen rotation
-and other configuration changes.  Although RTL support has bee present as part of Android since version 4.2, the `ViewPager`
+and other configuration changes.  Although RTL support has been present as part of Android since version 4.2, the `ViewPager`
 implementation in the support library does not.
 
 ## Usage
@@ -15,7 +15,7 @@ dependencies {
 ```
 [![Version Notifications](https://www.bintray.com/docs/images/bintray_badge_bw.png)](https://bintray.com/duolingo/maven/RtlViewPager?source=watch)
 
-## Lisence
+## License
 > Copyright 2016 Duolingo
 
 > Licensed under the Apache License, Version 2.0 (the "License");
