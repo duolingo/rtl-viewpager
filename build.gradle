@@ -83,6 +83,12 @@ publishing {
                 groupId 'com.duolingo.open'
                 artifactId 'rtl-viewpager'
                 version VERSION
+                pom.withXml {
+                    def license = asNode().appendNode('licenses').appendNode('license')
+                    license.appendNode('name', 'Apache License, Version 2.0')
+                    license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0')
+                    license.appendNode('distribution', 'repo')
+                }
             }
         }
     }
