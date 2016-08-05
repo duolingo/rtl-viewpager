@@ -74,10 +74,18 @@ bintray {
 publishing {
     publications {
         android.libraryVariants.all { variant ->
+            def sources = task "${variant.name}Sources"(type: Jar) {
+                variant.getSourceSets().each { sourceSet ->
+                    from sourceSet.getManifestFile()
+                    from sourceSet.getJavaDirectories()
+                }
+                classifier = 'sources'
+            }
             "${variant.name}Publication"(MavenPublication) {
                 variant.outputs.each { output ->
                     artifact output.outputFile
                 }
+                artifact sources
                 groupId 'com.duolingo.open'
                 artifactId 'rtl-viewpager'
                 version VERSION
