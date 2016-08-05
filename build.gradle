@@ -54,7 +54,7 @@ dependencies {
 bintray {
     user = localProperties.getProperty('bintray.user')
     key = localProperties.getProperty('bintray.key')
-    publications = ['release']
+    publications = ['releasePublication']
     publish = false
     pkg {
         repo = 'maven'
@@ -74,7 +74,7 @@ bintray {
 publishing {
     publications {
         android.libraryVariants.all { variant ->
-            create(variant.name,  MavenPublication) {
+            "${variant.name}Publication"(MavenPublication) {
                 variant.outputs.each { output ->
                     artifact output.outputFile
                 }
