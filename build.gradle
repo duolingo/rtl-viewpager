@@ -58,7 +58,7 @@ bintray {
     publish = false
     pkg {
         repo = 'maven'
-        name = 'RtlViewPager'
+        name = 'com.duolingo.open:rtl-viewpager'
         userOrg = 'duolingo'
         issueTrackerUrl = 'https://github.com/duolingo/rtl-viewpager/issues'
         vcsUrl = 'https://github.com/duolingo/rtl-viewpager.git'
