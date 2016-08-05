@@ -88,6 +88,7 @@ publishing {
                     license.appendNode('name', 'Apache License, Version 2.0')
                     license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0')
                     license.appendNode('distribution', 'repo')
+                    asNode().appendNode('scm').appendNode('url', 'https://github.com/duolingo/rtl-viewpager')
                 }
             }
         }
