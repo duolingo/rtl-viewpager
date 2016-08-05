@@ -71,8 +71,6 @@ bintray {
     }
 }
 
-bintrayUpload.dependsOn assembleRelease
-
 publishing {
     publications {
         android.libraryVariants.all { variant ->
