@@ -27,8 +27,8 @@ public class DelegatingPagerAdapter extends PagerAdapter {
     @NonNull
     private final PagerAdapter mDelegate;
 
-    public DelegatingPagerAdapter(@NonNull final PagerAdapter mDelegate) {
-        this.mDelegate = mDelegate;
+    public DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
+        this.mDelegate = delegate;
     }
 
     @NonNull
