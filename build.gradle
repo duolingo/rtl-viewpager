@@ -19,7 +19,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:2.1.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
     }
 }
@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-    provided 'com.android.support:support-v4:24.1.1'
+    provided 'com.android.support:support-v4:24.2.0'
 }
 
 bintray {
