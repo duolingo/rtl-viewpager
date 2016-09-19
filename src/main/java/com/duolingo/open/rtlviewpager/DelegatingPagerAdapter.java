@@ -29,6 +29,7 @@ public class DelegatingPagerAdapter extends PagerAdapter {
 
     public DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
         this.mDelegate = delegate;
+        delegate.registerDataSetObserver(new MyDataSetObserver(this));
     }
 
     @NonNull
@@ -105,6 +106,10 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         mDelegate.notifyDataSetChanged();
     }
 
+    void superNotifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
     public void registerDataSetObserver(DataSetObserver observer) {
         mDelegate.registerDataSetObserver(observer);
     }
@@ -119,5 +124,25 @@ public class DelegatingPagerAdapter extends PagerAdapter {
 
     public float getPageWidth(int position) {
         return mDelegate.getPageWidth(position);
+    }
+
+    private static class MyDataSetObserver extends DataSetObserver {
+        final DelegatingPagerAdapter mParent;
+
+        private MyDataSetObserver(DelegatingPagerAdapter mParent) {
+            this.mParent = mParent;
+        }
+
+        @Override
+        public void onChanged() {
+            if (mParent != null) {
+                mParent.superNotifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onInvalidated() {
+            onChanged();
+        }
     }
 }
