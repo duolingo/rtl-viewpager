@@ -6,6 +6,11 @@ It extends the functionality of `ViewPager` such that when the layout direction 
 and other configuration changes.  Although RTL support has been present as part of Android since version 4.2, the `ViewPager`
 implementation in the support library does not.
 
+## Preview
+
+![Duolingo home, English UI](docs/images/rtl-viewpager-en-home.gif)
+![Duolingo home, Arabic UI](docs/images/rtl-viewpager-ar-home.gif)
+
 ## Usage
 ```groovy
 dependencies {
