@@ -14,7 +14,7 @@ implementation in the support library does not.
 ## Usage
 ```groovy
 dependencies {
-    compile 'com.android.support:support-v4:<choose_your_version>'
+    compile 'com.android.support:support-core-ui:<choose_your_version>'
     compile 'com.duolingo.open:rtl-viewpager:1.0.1'
 }
 ```
