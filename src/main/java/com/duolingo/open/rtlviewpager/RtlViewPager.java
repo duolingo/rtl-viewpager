@@ -173,8 +173,8 @@ public class RtlViewPager extends ViewPager {
         }
 
         SavedState ss = (SavedState) state;
-        super.onRestoreInstanceState(ss.mViewPagerSavedState);
         mLayoutDirection = ss.mLayoutDirection;
+        super.onRestoreInstanceState(ss.mViewPagerSavedState);
     }
 
     @Override
