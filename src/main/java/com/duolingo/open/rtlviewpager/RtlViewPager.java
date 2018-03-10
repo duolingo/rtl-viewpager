@@ -198,6 +198,12 @@ public class RtlViewPager extends ViewPager {
     }
 
     @Override
+    public void clearOnPageChangeListeners() {
+        super.clearOnPageChangeListeners();
+        mPageChangeListeners.clear();
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED) {
             int height = 0;
