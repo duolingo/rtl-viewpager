@@ -191,7 +191,16 @@ public class RtlViewPager extends ViewPager {
 
     @Override
     public void removeOnPageChangeListener(OnPageChangeListener listener) {
-        super.removeOnPageChangeListener(mPageChangeListeners.get(listener));
+        ReversingOnPageChangeListener reverseListener = mPageChangeListeners.remove(listener);
+        if (reverseListener != null) {
+            super.removeOnPageChangeListener(reverseListener);
+        }
+    }
+
+    @Override
+    public void clearOnPageChangeListeners() {
+        super.clearOnPageChangeListeners();
+        mPageChangeListeners.clear();
     }
 
     @Override
