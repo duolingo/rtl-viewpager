@@ -18,6 +18,8 @@ dependencies {
     compile 'com.duolingo.open:rtl-viewpager:1.0.3'
 }
 ```
+[ ![Download](https://api.bintray.com/packages/duolingo/maven/com.duolingo.open%3Artl-viewpager/images/download.svg) ](https://bintray.com/duolingo/maven/com.duolingo.open%3Artl-viewpager/_latestVersion)
+
 [![Version Notifications](https://www.bintray.com/docs/images/bintray_badge_bw.png)](https://bintray.com/duolingo/maven/RtlViewPager?source=watch)
 
 ## Contributing
