@@ -15,7 +15,7 @@ implementation in the support library does not.
 ```groovy
 dependencies {
     compile 'com.android.support:support-core-ui:<choose_your_version>'
-    compile 'com.duolingo.open:rtl-viewpager:1.0.2'
+    compile 'com.duolingo.open:rtl-viewpager:1.0.3'
 }
 ```
 [![Version Notifications](https://www.bintray.com/docs/images/bintray_badge_bw.png)](https://bintray.com/duolingo/maven/RtlViewPager?source=watch)

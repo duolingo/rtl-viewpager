@@ -1,6 +1,10 @@
 RtlViewPager changelog
 ======================
 
+1.0.3
+-----
+* Fix bugs in `removeOnPageChangeListener` and `clearOnPageChangeListeners`.
+
 1.0.2
 -----
 * Fix a bug in onRestoreInstanceState where page change listeners would be called with the wrong position when in RTL mode.
