@@ -3,6 +3,7 @@ RtlViewPager changelog
 
 1.0.4
 -----
+* Get rid of deprecated APIs
 * Update target sdk version to 28.
 * Update gradle, plugins, libraries, and build tools.
 

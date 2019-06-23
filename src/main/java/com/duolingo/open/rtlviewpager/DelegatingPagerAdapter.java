@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016 Duolingo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,16 +24,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class DelegatingPagerAdapter extends PagerAdapter {
+
     @NonNull
     private final PagerAdapter mDelegate;
 
-    public DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
+    DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
         this.mDelegate = delegate;
         delegate.registerDataSetObserver(new MyDataSetObserver(this));
     }
 
     @NonNull
-    public PagerAdapter getDelegate() {
+    PagerAdapter getDelegate() {
         return mDelegate;
     }
 
@@ -61,31 +62,6 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         mDelegate.finishUpdate(container);
     }
 
-    @Deprecated
-    public void startUpdate(View container) {
-        mDelegate.startUpdate(container);
-    }
-
-    @Deprecated
-    public Object instantiateItem(View container, int position) {
-        return mDelegate.instantiateItem(container, position);
-    }
-
-    @Deprecated
-    public void destroyItem(View container, int position, Object object) {
-        mDelegate.destroyItem(container, position, object);
-    }
-
-    @Deprecated
-    public void setPrimaryItem(View container, int position, Object object) {
-        mDelegate.setPrimaryItem(container, position, object);
-    }
-
-    @Deprecated
-    public void finishUpdate(View container) {
-        mDelegate.finishUpdate(container);
-    }
-
     public boolean isViewFromObject(View view, Object object) {
         return mDelegate.isViewFromObject(view, object);
     }
@@ -106,10 +82,6 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         mDelegate.notifyDataSetChanged();
     }
 
-    void superNotifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
-
     public void registerDataSetObserver(DataSetObserver observer) {
         mDelegate.registerDataSetObserver(observer);
     }
@@ -124,6 +96,10 @@ public class DelegatingPagerAdapter extends PagerAdapter {
 
     public float getPageWidth(int position) {
         return mDelegate.getPageWidth(position);
+    }
+
+    private void superNotifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 
     private static class MyDataSetObserver extends DataSetObserver {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016 Duolingo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.v4.os.ParcelableCompat;
-import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -32,7 +30,7 @@ import android.view.ViewGroup;
 import java.util.HashMap;
 
 /**
- * <code>RtlViewPager</code> is an API-compatible implemetation of <code>ViewPager</code> which
+ * <code>RtlViewPager</code> is an API-compatible implementation of <code>ViewPager</code> which
  * orders paged views according to the layout direction of the view.  In left to right mode, the
  * first view is at the left side of the carousel, and in right to left mode it is at the right
  * side.
@@ -42,8 +40,9 @@ import java.util.HashMap;
  * modifications are kept internal to <code>RtlViewPager</code>.
  */
 public class RtlViewPager extends ViewPager {
+
+    final private HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
     private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
-    private HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
 
     public RtlViewPager(Context context) {
         super(context);
@@ -146,17 +145,24 @@ public class RtlViewPager extends ViewPager {
         }
 
         // The `CREATOR` field is used to create the parcelable from a parcel, even though it is never referenced directly.
-        public static final Parcelable.Creator<SavedState> CREATOR  = ParcelableCompat.newCreator(new ParcelableCompatCreatorCallbacks<SavedState>() {
+        public static final Parcelable.ClassLoaderCreator<SavedState> CREATOR
+                = new Parcelable.ClassLoaderCreator<SavedState>() {
+
             @Override
-            public SavedState createFromParcel(Parcel in, ClassLoader loader) {
-                return new SavedState(in, loader);
+            public SavedState createFromParcel(Parcel source) {
+                return createFromParcel(source, null);
+            }
+
+            @Override
+            public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+                return new SavedState(source, loader);
             }
 
             @Override
             public SavedState[] newArray(int size) {
                 return new SavedState[size];
             }
-        });
+        };
     }
 
     @Override
@@ -175,11 +181,6 @@ public class RtlViewPager extends ViewPager {
         SavedState ss = (SavedState) state;
         mLayoutDirection = ss.mLayoutDirection;
         super.onRestoreInstanceState(ss.mViewPagerSavedState);
-    }
-
-    @Override
-    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
-        super.setOnPageChangeListener(new ReversingOnPageChangeListener(listener));
     }
 
     @Override
@@ -223,7 +224,7 @@ public class RtlViewPager extends ViewPager {
     private class ReversingOnPageChangeListener implements OnPageChangeListener {
         private final OnPageChangeListener mListener;
 
-        public ReversingOnPageChangeListener(OnPageChangeListener listener) {
+        ReversingOnPageChangeListener(OnPageChangeListener listener) {
             mListener = listener;
         }
 
@@ -263,20 +264,13 @@ public class RtlViewPager extends ViewPager {
     }
 
     private class ReversingAdapter extends DelegatingPagerAdapter {
-        public ReversingAdapter(@NonNull PagerAdapter adapter) {
+
+        ReversingAdapter(@NonNull PagerAdapter adapter) {
             super(adapter);
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            if (isRtl()) {
-                position = getCount() - position - 1;
-            }
-            super.destroyItem(container, position, object);
-        }
-
-        @Override
-        public void destroyItem(View container, int position, Object object) {
             if (isRtl()) {
                 position = getCount() - position - 1;
             }
@@ -321,22 +315,6 @@ public class RtlViewPager extends ViewPager {
                 position = getCount() - position - 1;
             }
             return super.instantiateItem(container, position);
-        }
-
-        @Override
-        public Object instantiateItem(View container, int position) {
-            if (isRtl()) {
-                position = getCount() - position - 1;
-            }
-            return super.instantiateItem(container, position);
-        }
-
-        @Override
-        public void setPrimaryItem(View container, int position, Object object) {
-            if (isRtl()) {
-                position = getCount() - position - 1;
-            }
-            super.setPrimaryItem(container, position, object);
         }
 
         @Override
