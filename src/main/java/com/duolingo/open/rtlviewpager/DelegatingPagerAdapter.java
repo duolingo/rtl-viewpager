@@ -42,27 +42,28 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         return mDelegate.getCount();
     }
 
-    public void startUpdate(ViewGroup container) {
+    public void startUpdate(@NonNull ViewGroup container) {
         mDelegate.startUpdate(container);
     }
 
-    public Object instantiateItem(ViewGroup container, int position) {
+    @NonNull
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         return mDelegate.instantiateItem(container, position);
     }
 
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         mDelegate.destroyItem(container, position, object);
     }
 
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         mDelegate.setPrimaryItem(container, position, object);
     }
 
-    public void finishUpdate(ViewGroup container) {
+    public void finishUpdate(@NonNull ViewGroup container) {
         mDelegate.finishUpdate(container);
     }
 
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return mDelegate.isViewFromObject(view, object);
     }
 
@@ -74,7 +75,7 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         mDelegate.restoreState(state, loader);
     }
 
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return mDelegate.getItemPosition(object);
     }
 
@@ -82,11 +83,11 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         mDelegate.notifyDataSetChanged();
     }
 
-    public void registerDataSetObserver(DataSetObserver observer) {
+    public void registerDataSetObserver(@NonNull DataSetObserver observer) {
         mDelegate.registerDataSetObserver(observer);
     }
 
-    public void unregisterDataSetObserver(DataSetObserver observer) {
+    public void unregisterDataSetObserver(@NonNull DataSetObserver observer) {
         mDelegate.unregisterDataSetObserver(observer);
     }
 

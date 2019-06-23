@@ -184,14 +184,14 @@ public class RtlViewPager extends ViewPager {
     }
 
     @Override
-    public void addOnPageChangeListener(OnPageChangeListener listener) {
+    public void addOnPageChangeListener(@NonNull OnPageChangeListener listener) {
         ReversingOnPageChangeListener reversingListener = new ReversingOnPageChangeListener(listener);
         mPageChangeListeners.put(listener, reversingListener);
         super.addOnPageChangeListener(reversingListener);
     }
 
     @Override
-    public void removeOnPageChangeListener(OnPageChangeListener listener) {
+    public void removeOnPageChangeListener(@NonNull OnPageChangeListener listener) {
         ReversingOnPageChangeListener reverseListener = mPageChangeListeners.remove(listener);
         if (reverseListener != null) {
             super.removeOnPageChangeListener(reverseListener);
@@ -270,7 +270,7 @@ public class RtlViewPager extends ViewPager {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             if (isRtl()) {
                 position = getCount() - position - 1;
             }
@@ -278,7 +278,7 @@ public class RtlViewPager extends ViewPager {
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(@NonNull Object object) {
             int position = super.getItemPosition(object);
             if (isRtl()) {
                 if (position == POSITION_UNCHANGED || position == POSITION_NONE) {
@@ -309,8 +309,9 @@ public class RtlViewPager extends ViewPager {
             return super.getPageWidth(position);
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             if (isRtl()) {
                 position = getCount() - position - 1;
             }
@@ -318,7 +319,7 @@ public class RtlViewPager extends ViewPager {
         }
 
         @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             if (isRtl()) {
                 position = getCount() - position - 1;
             }
