@@ -1,6 +1,11 @@
 RtlViewPager changelog
 ======================
 
+1.0.4
+-----
+* Update target sdk version to 28.
+* Update gradle, plugins, libraries, and build tools.
+
 1.0.3
 -----
 * Fix bugs in `removeOnPageChangeListener` and `clearOnPageChangeListeners`.
