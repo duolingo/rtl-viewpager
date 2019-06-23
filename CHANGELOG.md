@@ -3,6 +3,7 @@ RtlViewPager changelog
 
 1.0.4
 -----
+* Migrate to AndroidX
 * Add @NonNull annotations
 * Get rid of deprecated APIs
 * Update target sdk version to 28.
