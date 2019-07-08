@@ -19,13 +19,14 @@ package com.duolingo.open.rtlviewpager;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.HashMap;
 
@@ -34,19 +35,20 @@ import java.util.HashMap;
  * orders paged views according to the layout direction of the view.  In left to right mode, the
  * first view is at the left side of the carousel, and in right to left mode it is at the right
  * side.
- *
+ * <p>
  * It accomplishes this by wrapping the provided <code>PagerAdapter</code> and any provided
  * <code>OnPageChangeListener</code>s so that clients can be agnostic to layout direction and
  * modifications are kept internal to <code>RtlViewPager</code>.
  */
 public class RtlViewPager extends ViewPager {
 
-    final private HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
+    private final HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
     private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
 
     public RtlViewPager(Context context) {
         super(context);
     }
+
     public RtlViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -116,7 +118,32 @@ public class RtlViewPager extends ViewPager {
         super.setCurrentItem(position);
     }
 
+    @Deprecated
+    @Override
+    public void setOnPageChangeListener(@NonNull ViewPager.OnPageChangeListener listener) {
+        super.setOnPageChangeListener(new ReversingOnPageChangeListener(listener));
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        return new SavedState(superState, mLayoutDirection);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState ss = (SavedState) state;
+        mLayoutDirection = ss.mLayoutDirection;
+        super.onRestoreInstanceState(ss.mViewPagerSavedState);
+    }
+
     public static class SavedState implements Parcelable {
+
         private final Parcelable mViewPagerSavedState;
         private final int mLayoutDirection;
 
@@ -163,24 +190,7 @@ public class RtlViewPager extends ViewPager {
                 return new SavedState[size];
             }
         };
-    }
 
-    @Override
-    public Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(superState, mLayoutDirection);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        if (!(state instanceof SavedState)) {
-            super.onRestoreInstanceState(state);
-            return;
-        }
-
-        SavedState ss = (SavedState) state;
-        mLayoutDirection = ss.mLayoutDirection;
-        super.onRestoreInstanceState(ss.mViewPagerSavedState);
     }
 
     @Override
@@ -222,6 +232,7 @@ public class RtlViewPager extends ViewPager {
     }
 
     private class ReversingOnPageChangeListener implements OnPageChangeListener {
+
         private final OnPageChangeListener mListener;
 
         ReversingOnPageChangeListener(OnPageChangeListener listener) {
@@ -277,6 +288,15 @@ public class RtlViewPager extends ViewPager {
             super.destroyItem(container, position, object);
         }
 
+        @Deprecated
+        @Override
+        public void destroyItem(@NonNull View container, int position, @NonNull Object object) {
+            if (isRtl()) {
+                position = getCount() - position - 1;
+            }
+            super.destroyItem(container, position, object);
+        }
+
         @Override
         public int getItemPosition(@NonNull Object object) {
             int position = super.getItemPosition(object);
@@ -309,9 +329,19 @@ public class RtlViewPager extends ViewPager {
             return super.getPageWidth(position);
         }
 
-        @NonNull
         @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        public @NonNull
+        Object instantiateItem(@NonNull ViewGroup container, int position) {
+            if (isRtl()) {
+                position = getCount() - position - 1;
+            }
+            return super.instantiateItem(container, position);
+        }
+
+        @Deprecated
+        @Override
+        public @NonNull
+        Object instantiateItem(@NonNull View container, int position) {
             if (isRtl()) {
                 position = getCount() - position - 1;
             }
@@ -325,6 +355,16 @@ public class RtlViewPager extends ViewPager {
             }
             super.setPrimaryItem(container, position, object);
         }
+
+        @Deprecated
+        @Override
+        public void setPrimaryItem(@NonNull View container, int position, @NonNull Object object) {
+            if (isRtl()) {
+                position = getCount() - position - 1;
+            }
+            super.setPrimaryItem(container, position, object);
+        }
+
     }
 }
 
