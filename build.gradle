@@ -41,17 +41,17 @@ repositories {
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
     }
 
 }
 
 dependencies {
-    compileOnly 'androidx.legacy:legacy-support-core-ui:1.0.0'
+    compileOnly 'androidx.viewpager:viewpager:1.0.0'
 }
 
 bintray {
