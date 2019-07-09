@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2016 Duolingo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,115 +18,138 @@ package com.duolingo.open.rtlviewpager;
 
 import android.database.DataSetObserver;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+
 public class DelegatingPagerAdapter extends PagerAdapter {
-    @NonNull
+
     private final PagerAdapter mDelegate;
 
-    public DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
+    DelegatingPagerAdapter(@NonNull final PagerAdapter delegate) {
         this.mDelegate = delegate;
         delegate.registerDataSetObserver(new MyDataSetObserver(this));
     }
 
-    @NonNull
-    public PagerAdapter getDelegate() {
+    PagerAdapter getDelegate() {
         return mDelegate;
     }
 
+    @Override
     public int getCount() {
         return mDelegate.getCount();
     }
 
-    public void startUpdate(ViewGroup container) {
+    @Override
+    public void startUpdate(@NonNull ViewGroup container) {
         mDelegate.startUpdate(container);
     }
 
-    public Object instantiateItem(ViewGroup container, int position) {
+    @Override
+    public @NonNull
+    Object instantiateItem(@NonNull ViewGroup container, int position) {
         return mDelegate.instantiateItem(container, position);
     }
 
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         mDelegate.destroyItem(container, position, object);
     }
 
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+    @Override
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         mDelegate.setPrimaryItem(container, position, object);
     }
 
-    public void finishUpdate(ViewGroup container) {
+    @Override
+    public void finishUpdate(@NonNull ViewGroup container) {
         mDelegate.finishUpdate(container);
     }
 
     @Deprecated
-    public void startUpdate(View container) {
+    @Override
+    public void startUpdate(@NonNull View container) {
         mDelegate.startUpdate(container);
     }
 
     @Deprecated
-    public Object instantiateItem(View container, int position) {
+    @Override
+    public @NonNull
+    Object instantiateItem(@NonNull View container, int position) {
         return mDelegate.instantiateItem(container, position);
     }
 
     @Deprecated
-    public void destroyItem(View container, int position, Object object) {
+    @Override
+    public void destroyItem(@NonNull View container, int position, @NonNull Object object) {
         mDelegate.destroyItem(container, position, object);
     }
 
     @Deprecated
-    public void setPrimaryItem(View container, int position, Object object) {
+    @Override
+    public void setPrimaryItem(@NonNull View container, int position, @NonNull Object object) {
         mDelegate.setPrimaryItem(container, position, object);
     }
 
     @Deprecated
-    public void finishUpdate(View container) {
+    @Override
+    public void finishUpdate(@NonNull View container) {
         mDelegate.finishUpdate(container);
     }
 
-    public boolean isViewFromObject(View view, Object object) {
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return mDelegate.isViewFromObject(view, object);
     }
 
+    @Override
     public Parcelable saveState() {
         return mDelegate.saveState();
     }
 
+    @Override
     public void restoreState(Parcelable state, ClassLoader loader) {
         mDelegate.restoreState(state, loader);
     }
 
-    public int getItemPosition(Object object) {
+    @Override
+    public int getItemPosition(@NonNull Object object) {
         return mDelegate.getItemPosition(object);
     }
 
+    @Override
     public void notifyDataSetChanged() {
         mDelegate.notifyDataSetChanged();
     }
 
-    void superNotifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
-
-    public void registerDataSetObserver(DataSetObserver observer) {
+    @Override
+    public void registerDataSetObserver(@NonNull DataSetObserver observer) {
         mDelegate.registerDataSetObserver(observer);
     }
 
-    public void unregisterDataSetObserver(DataSetObserver observer) {
+    @Override
+    public void unregisterDataSetObserver(@NonNull DataSetObserver observer) {
         mDelegate.unregisterDataSetObserver(observer);
     }
 
+    @Override
     public CharSequence getPageTitle(int position) {
         return mDelegate.getPageTitle(position);
     }
 
+    @Override
     public float getPageWidth(int position) {
         return mDelegate.getPageWidth(position);
     }
 
+    private void superNotifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
     private static class MyDataSetObserver extends DataSetObserver {
+
         final DelegatingPagerAdapter mParent;
 
         private MyDataSetObserver(DelegatingPagerAdapter mParent) {
@@ -144,5 +167,7 @@ public class DelegatingPagerAdapter extends PagerAdapter {
         public void onInvalidated() {
             onChanged();
         }
+
     }
+
 }

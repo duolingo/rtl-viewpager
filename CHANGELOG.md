@@ -1,6 +1,13 @@
 RtlViewPager changelog
 ======================
 
+2.0.0
+-----
+* Migrate to AndroidX
+* Add @NonNull annotations
+* Update target sdk version to 29.
+* Update gradle, plugins, libraries, and build tools.
+
 1.0.3
 -----
 * Fix bugs in `removeOnPageChangeListener` and `clearOnPageChangeListeners`.

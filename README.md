@@ -14,8 +14,8 @@ implementation in the support library does not.
 ## Usage
 ```groovy
 dependencies {
-    compile 'com.android.support:support-core-ui:<choose_your_version>'
-    compile 'com.duolingo.open:rtl-viewpager:1.0.3'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'com.duolingo.open:rtl-viewpager:2.0.0'
 }
 ```
 [ ![Download](https://api.bintray.com/packages/duolingo/maven/com.duolingo.open%3Artl-viewpager/images/download.svg) ](https://bintray.com/duolingo/maven/com.duolingo.open%3Artl-viewpager/_latestVersion)
