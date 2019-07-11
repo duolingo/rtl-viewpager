@@ -43,3 +43,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 A copy of the license is also available in the [license file](LICENSE).
+
+_Duolingo is hiring! Apply at https://www.duolingo.com/careers_
