@@ -28,7 +28,7 @@ Please read our [contributing guidelines](CONTRIBUTING.md).
 
 ## License
 
-> Copyright 2020 Duolingo
+> Copyright 2016-2020 Duolingo
 >
 > Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
