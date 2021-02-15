@@ -1,3 +1,7 @@
+# Deprecated
+
+This library is no longer supported. We recommend using [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2) for future development.
+
 # RtlViewPager
 `RtlViewPager` is built on top of `ViewPager` which is provided as part of the
 [AndroidX](https://developer.android.com/jetpack/androidx).
@@ -12,6 +16,9 @@ implementation in the support library does not.
 ![Duolingo home, Arabic UI](docs/images/rtl-viewpager-ar-home.gif)
 
 ## Usage
+
+Note that this library is no longer supported, and will no longer be available through jcenter [once it is shut down](https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/).
+
 ```groovy
 dependencies {
     implementation 'androidx.viewpager:viewpager:1.0.0'
