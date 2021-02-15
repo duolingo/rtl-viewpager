@@ -1,6 +1,6 @@
 # Deprecated
 
-This library is no longer supported. We recommend using [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2) for future development.
+This library is no longer supported. We recommend using [ViewPager2](https://developer.android.com/training/animation/vp2-migration) for future development.
 
 # RtlViewPager
 `RtlViewPager` is built on top of `ViewPager` which is provided as part of the
